@@ -9,9 +9,7 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          floatingActionButton: CustomFloatingButtonWidget(
-            onTap: () => foiClicado = true,
-          ),
+          floatingActionButton: CustomFloatingButtonWidget(onTap: () => foiClicado = true),
         ),
       ),
     );

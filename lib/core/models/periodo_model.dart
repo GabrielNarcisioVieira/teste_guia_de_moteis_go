@@ -21,7 +21,10 @@ class PeriodoModel {
     valor: (json['valor'] as num?)?.toDouble() ?? 0.0,
     valorTotal: (json['valorTotal'] as num?)?.toDouble() ?? 0.0,
     temCortesia: json['temCortesia'] ?? false,
-    desconto: json['desconto'] != null ? (json['desconto'] as num?)?.toDouble() ?? 0.0 : null,
+    desconto:
+        json['desconto'] != null
+            ? (json['desconto'] is Map ? (json['desconto']['desconto'] as num?)?.toDouble() ?? 0.0 : (json['desconto'] as num).toDouble())
+            : null,
   );
 
   PeriodoModel copyWith({String? tempoFormatado, String? tempo, double? valor, double? valorTotal, bool? temCortesia, double? desconto}) =>

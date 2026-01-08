@@ -1,13 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class HttpHelper{
+class HttpHelper {
   static Uri buildUri(String path, Map<String, dynamic>? queryParameters) {
     var uri = Uri.parse(path);
     if (queryParameters != null && queryParameters.isNotEmpty) {
-      final stringQuery = queryParameters.map(
-            (key, value) => MapEntry(key, value.toString()),
-      );
+      final stringQuery = queryParameters.map((key, value) => MapEntry(key, value.toString()));
       uri = uri.replace(queryParameters: stringQuery);
     }
     return uri;

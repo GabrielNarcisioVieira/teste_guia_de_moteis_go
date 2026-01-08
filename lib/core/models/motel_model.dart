@@ -23,19 +23,10 @@ class MotelModel {
     bairro: json['bairro'] ?? '',
     distancia: (json['distancia'] as num?)?.toDouble() ?? 0.0,
     qtdFavoritos: json['qtdFavoritos'] ?? 0,
-    suites: (json['suites'] as List?)
-        ?.map((s) => SuiteModel.fromJson(s))
-        .toList() ?? [],
+    suites: (json['suites'] as List?)?.map((s) => SuiteModel.fromJson(s)).toList() ?? [],
   );
 
-  MotelModel copyWith({
-    String? fantasia,
-    String? logo,
-    String? bairro,
-    double? distancia,
-    int? qtdFavoritos,
-    List<SuiteModel>? suites,
-  }) =>
+  MotelModel copyWith({String? fantasia, String? logo, String? bairro, double? distancia, int? qtdFavoritos, List<SuiteModel>? suites}) =>
       MotelModel(
         fantasia: fantasia ?? this.fantasia,
         logo: logo ?? this.logo,

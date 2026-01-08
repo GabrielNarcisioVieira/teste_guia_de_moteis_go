@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:teste_tecnico_guia_de_moteis/core/extensions/app_theme_extension.dart';
+import 'package:teste_tecnico_guia_de_moteis/design_system/widgets/custom_switch_button/custom_switch_option_widget.dart';
 
 class CustomSwitchButtonWidget extends StatefulWidget {
   const CustomSwitchButtonWidget({super.key});
@@ -12,70 +14,52 @@ class _CustomSwitchButtonWidgetState extends State<CustomSwitchButtonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return Container(
-      width: 300,
-      height: 50,
+      width: 280,
+      height: 37,
       decoration: BoxDecoration(
-        color: colorScheme.surfaceVariant, // Fundo sutil do tema
-        borderRadius: BorderRadius.circular(12),
+        color: context.primaryContainer,
+        borderRadius: BorderRadius.circular(50),
       ),
       child: Stack(
         children: [
-          // 1. O "Slider" (a parte branca que se move)
           AnimatedAlign(
             duration: const Duration(milliseconds: 250),
             curve: Curves.easeInOut,
-            alignment: selectedIndex == 0
-                ? Alignment.centerLeft
-                : Alignment.centerRight,
+            alignment: selectedIndex == 0 ? Alignment.centerLeft : Alignment.centerRight,
             child: Container(
-              width: 150, // Metade do container pai
+              width: 130,
               height: 50,
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
+                color: context.surfaceColor,
+                borderRadius: BorderRadius.circular(50),
+                boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 4, offset: const Offset(0, 2))],
               ),
             ),
           ),
-
-          // 2. Os Textos e a Lógica de Clique
           Row(
             children: [
-              _buildOption("Opção 1", 0),
-              _buildOption("Opção 2", 1),
+              CustomSwitchOptionWidget(
+                label: 'ir agora',
+                icon: Icons.flash_on,
+                index: 0,
+                selectedIndex: selectedIndex,
+                onTap: () {
+                  setState(() => selectedIndex = 0);
+                },
+              ),
+              CustomSwitchOptionWidget(
+                label: 'ir outro dia',
+                icon: Icons.edit_calendar_outlined,
+                index: 1,
+                selectedIndex: selectedIndex,
+                onTap: () {
+                  setState(() => selectedIndex = 1);
+                },
+              ),
             ],
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildOption(String label, int index) {
-    final isSelected = selectedIndex == index;
-
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => setState(() => selectedIndex = index),
-        behavior: HitTestBehavior.opaque,
-        child: Center(
-          child: AnimatedDefaultTextStyle(
-            duration: const Duration(milliseconds: 250),
-            style: TextStyle(
-              color: isSelected ? Colors.black : Colors.grey,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-            ),
-            child: Text(label),
-          ),
-        ),
       ),
     );
   }

@@ -5,7 +5,9 @@ import 'package:teste_tecnico_guia_de_moteis/core/interfaces/http_service_interf
 import 'package:http/http.dart' as http;
 
 class HttpService implements IHttpService {
-  final http.Client _client = http.Client();
+  final http.Client _client;
+
+  HttpService({http.Client? client}) : _client = client ?? http.Client();
 
   @override
   Future get(String path, {Map<String, dynamic>? queryParameters}) async {

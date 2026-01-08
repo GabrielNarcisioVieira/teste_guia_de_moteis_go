@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'app_colors.dart';
 
 class AppTheme {
@@ -6,17 +7,12 @@ class AppTheme {
 
   static final ThemeData lightTheme = _buildLightTheme();
 
-  static const _baseTextTheme = TextTheme(
-    // Título do Motel (Large Card)
-    headlineSmall: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.black),
-    // Nome da Suíte
-    titleLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.black),
-    // Preços e Títulos médios
-    titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-    // Texto de Bairros/Distância
-    bodyMedium: TextStyle(fontSize: 14, color: AppColors.greyMedium),
-    // Rating Count e textos pequenos
-    labelSmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.greyMedium),
+  static final _baseTextTheme = TextTheme(
+    headlineSmall: GoogleFonts.openSans(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.black),
+    titleLarge: GoogleFonts.openSans(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.black),
+    titleMedium: GoogleFonts.openSans(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.greyDark),
+    bodyMedium: GoogleFonts.openSans(fontSize: 14, color: AppColors.greyMedium),
+    labelSmall: GoogleFonts.openSans(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.greyMedium),
   );
 
   static ThemeData _buildLightTheme() {
@@ -24,10 +20,24 @@ class AppTheme {
       seedColor: AppColors.primaryRed,
       primary: AppColors.primaryRed,
       onPrimary: AppColors.white,
+      primaryContainer: AppColors.secondaryRed,
+      onPrimaryContainer: AppColors.white,
+      secondary: AppColors.accentGold,
+      onSecondary: AppColors.black,
+      tertiary: AppColors.tertiaryRed,
+      onTertiary: AppColors.white,
       surface: AppColors.white,
+      surfaceContainerHigh: AppColors.greyBackground,
       onSurface: AppColors.black,
-      error: AppColors.primaryRed,
+      surfaceContainerHighest: AppColors.greyLight,
+      surfaceContainerLowest: AppColors.greyLight2,
+      onSurfaceVariant: AppColors.greyDark,
+      outline: AppColors.grey2,
+      shadow: AppColors.grey,
+      error: AppColors.secondaryRed,
+      onError: AppColors.white,
       brightness: Brightness.light,
+      outlineVariant: AppColors.success
     );
 
     return ThemeData(
@@ -35,16 +45,12 @@ class AppTheme {
       colorScheme: colorScheme,
       scaffoldBackgroundColor: AppColors.greyBackground,
       textTheme: _baseTextTheme,
-
-      /// AppBar: CustomAppBar
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.primaryRed,
         foregroundColor: AppColors.white,
         elevation: 0,
         centerTitle: true,
       ),
-
-      /// Botões: CustomButton
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primaryRed,
@@ -54,8 +60,6 @@ class AppTheme {
           textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
       ),
-
-      /// Chips: CustomFilterChip
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.white,
         selectedColor: AppColors.primaryRed,
@@ -66,31 +70,17 @@ class AppTheme {
         secondaryLabelStyle: const TextStyle(color: AppColors.white),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: const BorderSide(color: AppColors.greyLight)),
       ),
-
-      /// Cards: CustomSmallMotelCard, CustomLargeMotelCard
       cardTheme: CardTheme(
         color: AppColors.white,
         elevation: 2,
         margin: const EdgeInsets.only(bottom: 16),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
-
-      /// Dropdown: CustomDropdown
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.white,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: const BorderSide(color: AppColors.greyLight)),
-      ),
-
-      /// Checkbox/Switch: CustomSwitchButton
-      switchTheme: SwitchThemeData(
-        thumbColor: WidgetStateProperty.resolveWith(
-          (states) => states.contains(WidgetState.selected) ? AppColors.white : AppColors.greyMedium,
-        ),
-        trackColor: WidgetStateProperty.resolveWith(
-          (states) => states.contains(WidgetState.selected) ? AppColors.primaryRed : AppColors.greyLight,
-        ),
       ),
     );
   }
