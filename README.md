@@ -1,100 +1,87 @@
-🏨 Guia de Motéis - Teste Técnico Flutter
-Este projeto é uma aplicação mobile desenvolvida em Flutter como parte de um desafio técnico. O objetivo é listar motéis e suas respectivas suítes, aplicando filtros avançados, cálculos de preços dinâmicos e uma experiência de usuário fluida com estados de carregamento e feedback visual.
+# 🏨 Guia de Motéis - Teste Técnico Flutter
 
-🚀 Funcionalidades
-Listagem Dinâmica: Exibição de motéis e suítes consumindo uma API REST.
+Este projeto é uma aplicação mobile robusta desenvolvida em **Flutter** como parte de um desafio técnico. A aplicação foca na listagem de motéis e suas respectivas suítes, implementando uma lógica de filtragem profunda e uma interface de usuário rica em feedbacks visuais.
 
-Filtros Avançados: Filtragem profunda que atua diretamente nas suítes (Piscina, Hidro, Desconto, etc.).
+---
 
-Cálculo de Preços: Identificação automática do menor valor de entrada entre todas as suítes disponíveis.
+## 🚀 Funcionalidades Principais
 
-UX/UI Premium: * Efeito Shimmer durante o carregamento.
+* **Listagem Dinâmica:** Consumo de API REST para exibição de motéis e suítes.
+* **Filtros de Suíte:** Lógica de filtragem avançada que atua no nível da suíte (Piscina, Hidro, Sauna, Desconto, etc.).
+* **Cálculo de Menor Preço:** Identificação automática do menor valor de entrada entre todos os períodos de todas as suítes de um motel.
+* **UX/UI Premium:**
+    * **Shimmer Effect:** Esqueleto de carregamento (Skeleton) para uma transição suave de dados.
+    * **Pull-to-Refresh:** Atualização manual da listagem através do gesto de deslizar.
+    * **Empty State:** Tela de feedback customizada com opção de limpar filtros quando não há resultados.
+    * **Design System:** Tematização via extensões de contexto (ThemeExtension) para cores e tipografia consistentes.
 
-Pull-to-Refresh para atualizar os dados.
+---
 
-Empty State customizado para buscas sem resultados.
+## 🏗️ Arquitetura e Organização
 
-Design System próprio com suporte a extensões de tema.
+O projeto utiliza os princípios da **Clean Architecture** adaptados ao padrão **MVVM (Model-View-ViewModel)**, garantindo a separação de responsabilidades e alta testabilidade.
 
-🏗️ Arquitetura e Organização
-O projeto segue os princípios da Clean Architecture e do padrão MVVM (Model-View-ViewModel), garantindo separação de responsabilidades e facilidade para testes unitários.
+### Estrutura de Pastas:
+- **lib/core:** Base do projeto (Models, Services, Extensions, Utils, Enums e Helpers).
+- **lib/design_system:** Biblioteca de componentes visuais, widgets customizados e definições de tema.
+- **lib/modules:** Divisão por módulos da aplicação.
+    - **Repository:** Comunicação com o HttpService e tratamento de erros.
+    - **ViewModel:** Gerenciamento de estado (ChangeNotifier) e lógica de filtragem.
+    - **View:** Interface do usuário (UI) e widgets de tela.
 
-Plaintext
+---
 
-lib/
-├── core/              # Lógicas globais, modelos, serviços e extensões
-├── design_system/     # Componentes de UI reaproveitáveis, cores e temas
-└── modules/           # Módulos da aplicação (ex: Home)
-├── repository/   # Comunicação com a fonte de dados
-├── view/         # Telas (Widgets de alto nível)
-└── view_model/   # Lógica de estado e regras de negócio da tela
-🛠️ Tecnologias e Dependências
-Gerenciamento de Estado: ChangeNotifier com ListenableBuilder.
+## 🛠️ Tecnologias e Bibliotecas
 
-Injeção de Dependência: GetIt.
+* **Estado:** ChangeNotifier + ListenableBuilder.
+* **Injeção de Dependência:** GetIt (Service Locator).
+* **Consumo de API:** http.
+* **UI & Estilização:** shimmer, flutter_svg, google_fonts, intl.
+* **Testes:** flutter_test, mocktail, network_image_mock.
 
-Consumo de API: http.
+---
 
-Animações e UI: shimmer, flutter_svg, google_fonts.
+## 🧪 Testes e Cobertura
 
-Testes: flutter_test, mocktail, network_image_mock.
+O projeto foi construído com foco em **testabilidade**, possuindo uma suite de testes que cobre Unitários (Core/Model/Service), de Widget (Design System) e de Integração (ViewModel).
 
-🏁 Como Rodar o Projeto
-Pré-requisitos
-Flutter instalado (versão estável mais recente recomendada).
-
-Um emulador (Android/iOS) ou dispositivo físico conectado.
-
-Instalação
-Clone o repositório:
-
-Bash
-
-git clone https://github.com/seu-usuario/teste_tecnico_guia_de_moteis.git
-Entre na pasta do projeto:
-
-Bash
-
-cd teste_tecnico_guia_de_moteis
-Instale as dependências:
-
-Bash
-
-flutter pub get
-Execute o app:
-
-Bash
-
-flutter run
-🧪 Testes e Cobertura
-O projeto foi desenvolvido com foco em alta testabilidade, cobrindo desde modelos de dados até interações de interface. Atualmente, o projeto mantém uma meta de +70% de cobertura.
-
-Rodar todos os testes
-Bash
-
+### Rodar os testes:
+Para executar todos os testes unitários e de widget:
 flutter test
-Gerar relatório de cobertura (LCOV)
-Para verificar a cobertura detalhada, execute:
 
-Bash
+### Gerar relatório de cobertura:
+Para gerar o relatório detalhado de cobertura (necessário ter o lcov instalado):
 
-# 1. Gera o arquivo de cobertura
+1. Executa os testes e gera os dados:
 flutter test --coverage
 
-# 2. Gera o HTML (Requer lcov instalado)
+2. Gera o HTML (Opcional):
 genhtml coverage/lcov.info -o coverage/html
 
-# 3. Abrir no navegador (Windows)
+3. Abrir no navegador (Windows):
 start coverage/html/index.html
-Nota: Os testes de widget utilizam mockNetworkImagesFor para simular o carregamento de imagens de rede sem necessidade de conexão real.
 
-🎨 Design System
-Os componentes foram criados de forma modular no diretório design_system.
+Nota: Os testes de UI utilizam mockNetworkImagesFor para garantir que o layout seja testado sem depender de conexões reais com a internet.
 
-CustomSwitchButton: Alternância entre "ir agora" e "ir outro dia" com animações suaves.
+---
 
-CustomLargeMotelCard: Card principal que encapsula o carrossel de suítes.
+## 🏁 Como Iniciar o Projeto
 
-AppThemeExtension: Facilita o acesso às cores e estilos de texto via context.primaryColor, etc.
+1. **Pré-requisitos:** Ter o Flutter instalado na versão estável mais recente.
+2. **Clone o repo:** git clone https://github.com/seu-usuario/teste_tecnico_guia_de_moteis.git
+3. **Instale as dependências:**
+flutter pub get
+4. **Execute a aplicação:**
+flutter run
 
-Desenvolvido por Gabriel – 2026.
+---
+
+## 🎨 Componentes do Design System
+
+- **CustomSwitchButton:** Alternância animada com AnimatedAlign entre as opções de reserva.
+- **CustomLargeMotelCard:** Componente principal que integra o carrossel de suítes e informações de avaliação.
+- **CustomFilterList:** Cabeçalho persistente (Sliver) que facilita a filtragem rápida.
+- **AppThemeExtension:** Extensão que permite acessar o tema de forma limpa: context.primaryColor ou context.headlineSmall.
+
+---
+Desenvolvido por Gabriel - Janeiro de 2026.
